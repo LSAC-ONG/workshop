@@ -1,12 +1,62 @@
-const { MongoMemoryServer } = require('mongodb-memory-server');
-const mongoose = require('mongoose');
+// MOCKING DATA SERVER
+const { v4 } = require('uuid');
 
-MongoMemoryServer.create().then((mongod) => {
-    const uri = mongod.getUri();
-    mongoose.connect(uri, () => {
-        console.log("connected to mongo");
-    })
-});
+class model {
+    constructor() {
+        this.data = [];
+    }
+
+    find() {
+        return this.data;
+    }
+
+    findOne({ id }) {
+        return this.data.find(entry => entry._id === id);
+    }
+
+    create(data) {
+        data._id = v4();
+        this.data.push(data);
+        return data;
+    }
+
+    updateOne({ id }, { done, text }) {
+        const entry = this.findOne({ id });
+
+        if (!entry) return null;
+        if (done) entry.done = done;
+        if (text) entry.text = text;
+
+        return entry;
+    }
+
+    deleteOne({ id }) {
+        const pos = this.data.findIndex(entry => entry._id === id);
+        return this.data.splice(pos, 1);
+    }
+}
+
+class mongooseMock {
+    connect(url, a) {a();}
+    model(name, schema) {
+        return new model;
+    }
+
+    Schema = class {
+        constructor(a ,b) {}
+    }
+}
+// END MOCKING DATA SERVER
+
+// const mongoose = require('mongoose');
+const mongoose = new mongooseMock();
+
+const url = "mongodb://127.0.0.1/DB_NAME"
+mongoose.connect(url, (e) => {
+    console.log(e);
+    console.log("connected to mongo");
+})
+
 
 const TodoSchema = new mongoose.Schema(
   {
@@ -31,12 +81,12 @@ app = express();
 app.use(cors());
 app.use(bodyparser.json());
 
-app.get('/', async (req, res) => {
+app.get('/', async function (req, res) {
     const todos = await Todo.find();
     res.send(todos);
 })
 
-app.post('/', async (req, res) => {
+app.post('/', async function (req, res) {
     const { text } = req.body;
 
     const todo = await Todo.create({
@@ -47,7 +97,7 @@ app.post('/', async (req, res) => {
     res.send(todo);
 })
 
-app.patch('/:id', async (req, res) => {
+app.patch('/:id', async function (req, res) {
     const { text, done } = req.body;
     const { id } = req.params;
 
@@ -58,7 +108,7 @@ app.patch('/:id', async (req, res) => {
     res.send(todoResult);
 })
 
-app.delete('/:id', async (req, res) => {
+app.delete('/:id', async function (req, res) {
     const { id } = req.params;
 
     const result = await Todo.deleteOne({ id });
