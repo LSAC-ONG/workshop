@@ -1,61 +1,48 @@
 import './App.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+
+const API_URL = 'http://localhost:5000/';
 
 function App() {
-    let initIndex = 0;
-    const [todo, setTodo] = useState([
+    const [todos, setTodos] = useState([
         {
-            id: ++initIndex,
-            text:"Dragos este sexy",
-            done: true
-        },{
-            id: ++initIndex,
-            text:"Dragos este extrem de sexy",
-            done: false
-        },{
-            id: ++initIndex,
-            text:"Codrut este zeul meme-urilo",
-            done: false
-        },{
-            id: ++initIndex,
-            text:"Pirvulet was here!",
-            done: true
-        }, {
-            id: ++initIndex,
-            text: "Acesta este doar un text foarte lung pentru a testa! Mi-a fost lene sa caut pe Google Lorem Ipsum-ul",
-            done: true
-        },
-    ])
-    const [index, setIndex] = useState(initIndex + 1)
-    function changeButtonState(id) {
-        const localTodo = todo
-        localTodo.map(item=>{
-            if(item.id === id){
-                item.done = !item.done;
-            }
-            return item;
+            id: "None",
+            text: "plimba",
+            done: false,
+        }
+    ]);
+
+    async function getTodos() {
+        let response = await axios.get(API_URL);
+        setTodos(response.data);
+    }
+
+    useEffect(() => {
+        getTodos();
+    }, []);
+
+    async function addNewToDo(e) {
+        e.preventDefault();
+        let body = {
+            text: e.target.todoAdder.value
+        };
+
+        await axios.post(API_URL, body);
+        await getTodos();
+    }
+
+    async function changeButtonState(item) {
+        await axios.patch(API_URL + item._id, {
+            text: item.text,
+            done: !item.done
         })
-        setTodo([...localTodo])
+        await getTodos();
     }
 
-    function removeToDo(item) {
-        const index = todo.indexOf(item);
-        let localTodo = todo
-        localTodo.splice(index,1)
-        setTodo([...localTodo])
-    }
-
-    function addNewToDo(e) {
-        e.preventDefault()
-        const formData = new FormData(e.target)
-        const text = formData.get("todoAdder")
-        setTodo([...todo,{
-            id: index,
-            text,
-            done: false
-        }])
-        setIndex(index + 1)
-        document.getElementById("todoAdder").setAttribute("text","")
+    async function removeToDo(item) {
+        await axios.delete(API_URL + item._id);
+        await getTodos();
     }
 
     return (
@@ -70,14 +57,11 @@ function App() {
             </fieldset>
         </form>
         <ul>
-            {todo.map(item=>{
+            {todos.map(item=>{
                 return (
-                <li className={item.done ? "finished" : "notFinished"} key={item.id}>
-                    {`${item.id}: ${item.text}`}
-                    <span>
-                        <button onPointerDown={() => changeButtonState(item.id)}>Mark as {item.done? "unfinished": "finished"}</button>
-                        <button onPointerDown={() => removeToDo(item)}>Delete</button>
-                    </span>
+                <li className={item.done ? "finished" : "notFinished"} key={item._id}>
+                    {`${item._id}: ${item.text}`}
+                    <span> <button onPointerDown={() => changeButtonState(item)}>Mark as {item.done? "unfinished": "finished"}</button> <button onPointerDown={() => removeToDo(item)}>Delete</button> </span>
                 </li>
                 )
             })}
