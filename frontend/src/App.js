@@ -57,10 +57,10 @@ function App() {
             </fieldset>
         </form>
         <ul>
-            {todos.map(item=>{
+            {todos.map((item, index)=>{
                 return (
                 <li className={item.done ? "finished" : "notFinished"} key={item._id}>
-                    {`${item._id}: ${item.text}`}
+                    {`${index}: ${item.text}`}
                     <span> <button onPointerDown={() => changeButtonState(item)}>Mark as {item.done? "unfinished": "finished"}</button> <button onPointerDown={() => removeToDo(item)}>Delete</button> </span>
                 </li>
                 )
