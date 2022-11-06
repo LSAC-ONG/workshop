@@ -1,93 +1,45 @@
-// MOCKING DATA SERVER
-const { v4 } = require('uuid');
-
-class model {
-    constructor() {
-        this.data = [];
-    }
-
-    find() {
-        return this.data;
-    }
-
-    findOne({ id }) {
-        return this.data.find(entry => entry._id === id);
-    }
-
-    create(data) {
-        data._id = v4();
-        this.data.push(data);
-        return data;
-    }
-
-    updateOne({ id }, { done, text }) {
-        const entry = this.findOne({ id });
-
-        if (!entry) return null;
-        if (typeof done === "boolean") entry.done = done;
-        if (text) entry.text = text;
-
-        return entry;
-    }
-
-    deleteOne({ id }) {
-        const pos = this.data.findIndex(entry => entry._id === id);
-        return this.data.splice(pos, 1);
-    }
-}
-
-class mongooseMock {
-    connect(url, a) {a();}
-    model(name, schema) {
-        return new model;
-    }
-
-    Schema = class {
-        constructor(a ,b) {}
-    }
-}
-// END MOCKING DATA SERVER
-
-// const mongoose = require('mongoose');
-const mongoose = new mongooseMock();
-
-const url = "mongodb://127.0.0.1/DB_NAME"
-mongoose.connect(url, (e) => {
-    console.log(e);
-    console.log("connected to mongo");
-})
-
-
-const TodoSchema = new mongoose.Schema(
-  {
-    text: {
-      type: String,
-      required: true,
-    },
-    done: {
-      type: Boolean,
-      required: true,
-    },
-  }
-);
-const Todo = mongoose.model("todos", TodoSchema);
-
-
 const express = require("express");
 const cors = require("cors");
 const bodyparser = require("body-parser");
+const Todo = require("./mock-database")
 
 app = express();
+/*
+    TODO 1.x: Decomenteaza urmatorul block, o sa avem nevoie de el cand
+        incercam sa conectam frontend-ul si backend-ul
+*/
+/*
 app.use(cors());
+*/
 app.use(bodyparser.json());
 
+/*
+    TODO 1.2: Decomenteaza urmatorul block pentru a putea sa primesti
+        o lista cu toate todo-urile stocate in baza de date    
+
+    * Todo.find() - aceasta functie o sa ne intoarca din baza de date
+        un vector cu toate todo-urile stocate
+
+    * prin intermediul functiei send trimitem ca body un todo
+*/
+/*
 app.get('/', async function (req, res) {
     const todos = await Todo.find();
     res.send(todos);
 })
+*/
 
+/*
+    TODO 1.3: Decomenteaza urmatorul block pentru a putea sa adaugi 
+        un nou todo in baza de date    
+    
+    * req.body - ne intoarce body-ul primit de la client
+        in cazul nostru, acest body contine text-ul noului 
+        todo pe care vrem sa il cream
+*/
+/*
 app.post('/', async function (req, res) {
-    const { text } = req.body;
+    const text = req.body.text;
 
     const todo = await Todo.create({
         text: text,
@@ -96,7 +48,9 @@ app.post('/', async function (req, res) {
 
     res.send(todo);
 })
+*/
 
+/*
 app.patch('/:id', async function (req, res) {
     const { text, done } = req.body;
     const { id } = req.params;
@@ -107,14 +61,37 @@ app.patch('/:id', async function (req, res) {
     });
     res.send(todoResult);
 })
+*/
 
+/*
 app.delete('/:id', async function (req, res) {
     const { id } = req.params;
 
     const result = await Todo.deleteOne({ id });
     res.send(result);
 })
+*/
+
+/*
+    TODO 1.1: Decomenteaza urmatorul block pentru a porni aplicatia
+
+    * app.get - o sa primeasca toate request-urile de tip GET catre 
+        un endpoint(primul parametru) si va executa o functie(al doilea
+        parametru)
+
+    * req si res - sunt 2 parametrii pe care functia noastra ii primeste direct
+        de la express si care contin datele despre request-ul pe care l-a primit
+        server-ul si response-ul pe care il va trimite
+
+    * app.listen - aplicatia va pute primi toate request-urile trimise 
+        catre port-ul 5000 al server-ului
+*/
+/*
+app.get('/test', function (req, res) {
+    res.send("Hello World!")
+})
 
 app.listen(5000, () => {
     console.log('Listening on 5000');
 })
+*/
