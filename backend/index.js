@@ -24,7 +24,7 @@ class model {
         const entry = this.findOne({ id });
 
         if (!entry) return null;
-        if (done) entry.done = done;
+        if (typeof done === "boolean") entry.done = done;
         if (text) entry.text = text;
 
         return entry;

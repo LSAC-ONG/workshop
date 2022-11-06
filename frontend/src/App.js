@@ -51,8 +51,8 @@ function App() {
         <form action="" onSubmit={addNewToDo}>
             <fieldset>
                 <legend>Adauga un nou Item</legend>
-                <label htmlFor="todoAdder">Add new item</label><br/>
-                <input type="text" name="todoAdder" id="todoAdder" placeholder={"Tasteaza aici."} required={true}/><br/>
+                <label htmlFor="todoAdder">Add new item</label>
+                <input type="text" name="todoAdder" id="todoAdder" placeholder={"Tasteaza aici."} required={true}/>
                 <button type="submit">Adauga</button>
             </fieldset>
         </form>
