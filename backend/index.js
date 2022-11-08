@@ -23,7 +23,7 @@ app.use(bodyparser.json());
     * prin intermediul functiei send trimitem ca body un todo
 */
 /*
-app.get('/', async function (req, res) {
+app.get('/', async (req, res) => {
     const todos = await Todo.find();
     res.send(todos);
 })
@@ -38,7 +38,7 @@ app.get('/', async function (req, res) {
         todo pe care vrem sa il cream
 */
 /*
-app.post('/', async function (req, res) {
+app.post('/', async (req, res) => {
     const text = req.body.text;
 
     const todo = await Todo.create({
@@ -51,7 +51,7 @@ app.post('/', async function (req, res) {
 */
 
 /*
-app.patch('/:id', async function (req, res) {
+app.patch('/:id', async (req, res) => {
     const { text, done } = req.body;
     const { id } = req.params;
 
@@ -64,7 +64,7 @@ app.patch('/:id', async function (req, res) {
 */
 
 /*
-app.delete('/:id', async function (req, res) {
+app.delete('/:id', async (req, res) => {
     const { id } = req.params;
 
     const result = await Todo.deleteOne({ id });
@@ -86,12 +86,10 @@ app.delete('/:id', async function (req, res) {
     * app.listen - aplicatia va pute primi toate request-urile trimise 
         catre port-ul 5000 al server-ului
 */
-/*
-app.get('/test', function (req, res) {
+app.get('/test', (req, res) => {
     res.send("Hello World!")
 })
 
 app.listen(5000, () => {
     console.log('Listening on 5000');
 })
-*/

@@ -4,7 +4,8 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/';
 
-function App() {
+function BeApp() {
+    /*
     const [todos, setTodos] = useState([
         {
             id: "None",
@@ -44,9 +45,17 @@ function App() {
         await axios.delete(API_URL + item._id);
         await getTodos();
     }
+    */
 
     return (
     <div className="App">
+        {/* 
+            TODO 1.1: Scoate blocul urmator din comentarii
+                      si vezi ce apare pe ecran
+        */}
+
+        {/*
+
         <h1>To Do App - Workshop IT</h1>
         <form action="" onSubmit={addNewToDo}>
             <fieldset>
@@ -56,18 +65,25 @@ function App() {
                 <button type="submit">Adauga</button>
             </fieldset>
         </form>
-        <ul>
-            {todos.map((item, index)=>{
-                return (
-                <li className={item.done ? "finished" : "notFinished"} key={item._id}>
-                    {`${index}: ${item.text}`}
-                    <span> <button onPointerDown={() => changeButtonState(item)}>Mark as {item.done? "unfinished": "finished"}</button> <button onPointerDown={() => removeToDo(item)}>Delete</button> </span>
-                </li>
-                )
-            })}
-        </ul>
+
+        */}
+
+
+
+
+
+        {/* <ul> */}
+        {/*     {todos.map((item, index)=>{ */}
+        {/*         return ( */}
+        {/*         <li className={item.done ? "finished" : "notFinished"} key={item._id}> */}
+        {/*             {`${index}: ${item.text}`} */}
+        {/*             <span> <button onPointerDown={() => changeButtonState(item)}>Mark as {item.done? "unfinished": "finished"}</button> <button onPointerDown={() => removeToDo(item)}>Delete</button> </span> */}
+        {/*         </li> */}
+        {/*         ) */}
+        {/*     })} */}
+        {/* </ul> */}
     </div>
   );
 }
 
-export default App;
+export default BeApp;
