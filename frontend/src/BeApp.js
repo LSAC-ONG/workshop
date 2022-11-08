@@ -2,7 +2,7 @@ import './App.css';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/';
+const API_URL = 'http://localhost:5000/todos';
 
 function BeApp() {
     /*
@@ -23,17 +23,17 @@ function BeApp() {
         getTodos();
     }, []);
 
-    async function addNewToDo(e) {
-        e.preventDefault();
+    async function addNewToDo(form) {
+        form.preventDefault();
         let body = {
-            text: e.target.todoAdder.value
+            text: form.target.todoText.value
         };
 
         await axios.post(API_URL, body);
         await getTodos();
     }
 
-    async function changeButtonState(item) {
+    async function updateTodo(item) {
         await axios.patch(API_URL + item._id, {
             text: item.text,
             done: !item.done
@@ -41,7 +41,7 @@ function BeApp() {
         await getTodos();
     }
 
-    async function removeToDo(item) {
+    async function removeTodo(item) {
         await axios.delete(API_URL + item._id);
         await getTodos();
     }
@@ -55,33 +55,33 @@ function BeApp() {
         */}
 
         {/*
-
         <h1>To Do App - Workshop IT</h1>
-        <form action="" onSubmit={addNewToDo}>
-            <fieldset>
-                <legend>Adauga un nou Item</legend>
-                <label htmlFor="todoAdder">Add new item</label>
-                <input type="text" name="todoAdder" id="todoAdder" placeholder={"Tasteaza aici."} required={true}/>
-                <button type="submit">Adauga</button>
-            </fieldset>
+        <form action="" onSubmit={addNewTodo}>
+            <label htmlFor="todoAdder">Add new item</label>
+            <input type="text" name="todoText" id="todoText" placeholder={"Tasteaza aici."} required={true}/>
+            <button type="submit">Adauga</button>
         </form>
-
         */}
 
-
-
-
-
-        {/* <ul> */}
-        {/*     {todos.map((item, index)=>{ */}
-        {/*         return ( */}
-        {/*         <li className={item.done ? "finished" : "notFinished"} key={item._id}> */}
-        {/*             {`${index}: ${item.text}`} */}
-        {/*             <span> <button onPointerDown={() => changeButtonState(item)}>Mark as {item.done? "unfinished": "finished"}</button> <button onPointerDown={() => removeToDo(item)}>Delete</button> </span> */}
-        {/*         </li> */}
-        {/*         ) */}
-        {/*     })} */}
-        {/* </ul> */}
+        {/* 
+        <ul>
+            {todos.map((item, index)=>{
+                return (
+                <li className={item.done ? "finished" : "notFinished"} key={item._id}>
+                    {`${index}: ${item.text}`}
+                    <span>
+                        <button onPointerDown={() => updateTodo(item)}>
+                            Mark as {item.done? "unfinished": "finished"}
+                        </button>
+                        <button onPointerDown={() => removeTodo(item)}>
+                            Delete
+                        </button>
+                    </span>
+                </li>
+                )
+            })}
+        </ul>
+        */}
     </div>
   );
 }

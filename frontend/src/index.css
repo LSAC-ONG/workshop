@@ -76,7 +76,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-fieldset{
+
+form {
   display: flex;
   justify-content: center;
   align-items: center;

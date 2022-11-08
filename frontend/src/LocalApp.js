@@ -1,9 +1,5 @@
 import './App.css';
-import {useEffect, useState} from 'react';
-import {v4} from 'uuid';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:5000/';
+import {useState} from 'react';
 
 function LocalApp() {
     /* 
@@ -22,12 +18,10 @@ function LocalApp() {
     /*
     const [todos, setTodos] = useState([
         {
-            id: v4(),
-            text:"Dragos este sexy",
+            text:"Mulge vaca",
             done: true
         }, {
-            id: v4(),
-            text:"Dragos este extrem de sexy",
+            text:"Strange laptele",
             done: false
         }
     ]);
@@ -48,38 +42,11 @@ function LocalApp() {
 
         let newEntry = {
             text: form.target.todoAdder.value,
-            done: false,
-            id: v4()
+            done: false
         };
         
         setTodos([...todos, newEntry]);
     }
-    */
-
-    /*
-        TODO 4: decomenteaza blocul urmator pentru a putea modifica
-        Todo-urile exitente
-    */
-
-    /*
-    function updateTodo(id) {
-        const localTodos = todos;
-
-        const index = localTodos.findIndex(item => item.id === id);
-        localTodos[index].done = !localTodos[index].done;
-
-        setTodos(localTodos);
-    }
-
-    function removeTodo(item) {
-        const index = todos.indexOf(item);
-
-        let localTodos = todos
-        localTodos.splice(index,1)
-
-        setTodos([...localTodos])
-    }
-
     */
 
     return (
@@ -96,21 +63,15 @@ function LocalApp() {
         */}
         {/*
         <form action="" onSubmit={addNewTodo}>
-            <fieldset>
-                <legend>Adauga un nou Item</legend>
-                <label htmlFor="todoAdder">Add new item</label>
-                <input type="text" name="todoAdder" id="todoAdder" placeholder={"Tasteaza aici."} required={true}/>
-                <button type="submit">Adauga</button>
-            </fieldset>
+            <label htmlFor="todoAdder">Add new item</label>
+            <input type="text" name="todoAdder" id="todoAdder" placeholder={"Tasteaza aici."} required={true}/>
+            <button type="submit">Adauga</button>
         </form>
         */}
 
         {
         /* 
             TODO 2.2: Decomenteaza blocul urmator pentru a afisa lista de todo-uri
-            
-            Explicatii:
-            :want
         */
         }
         {/*
@@ -119,19 +80,6 @@ function LocalApp() {
                 return (
                     <li className={item.done ? "finished" : "notFinished"} key={item.id}>
                         {`${index + 1}: ${item.text}`}
-                        <span>
-                            {
-                                // TODO 4: Cu ce functii din cod credeti ca ati putea schimba
-                                // true pentru a modifica si sterge Todo-ul
-                            }
-                            <button onClick={() => true}>
-                                Mark as {item.done? "unfinished": "finished"}
-                            </button>
-
-                            <button onClick={() => true}>
-                                Delete
-                            </button>
-                        </span>
                     </li>
                 )
             })}

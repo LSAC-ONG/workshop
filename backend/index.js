@@ -4,13 +4,7 @@ const bodyparser = require("body-parser");
 const Todo = require("./mock-database")
 
 app = express();
-/*
-    TODO 1.x: Decomenteaza urmatorul block, o sa avem nevoie de el cand
-        incercam sa conectam frontend-ul si backend-ul
-*/
-/*
 app.use(cors());
-*/
 app.use(bodyparser.json());
 
 /*
@@ -23,7 +17,7 @@ app.use(bodyparser.json());
     * prin intermediul functiei send trimitem ca body un todo
 */
 /*
-app.get('/', async (req, res) => {
+app.get('/todos', async (req, res) => {
     const todos = await Todo.find();
     res.send(todos);
 })
@@ -38,7 +32,7 @@ app.get('/', async (req, res) => {
         todo pe care vrem sa il cream
 */
 /*
-app.post('/', async (req, res) => {
+app.post('/todos', async (req, res) => {
     const text = req.body.text;
 
     const todo = await Todo.create({
@@ -51,7 +45,7 @@ app.post('/', async (req, res) => {
 */
 
 /*
-app.patch('/:id', async (req, res) => {
+app.patch('/todos/:id', async (req, res) => {
     const { text, done } = req.body;
     const { id } = req.params;
 
@@ -64,7 +58,7 @@ app.patch('/:id', async (req, res) => {
 */
 
 /*
-app.delete('/:id', async (req, res) => {
+app.delete('/todos/:id', async (req, res) => {
     const { id } = req.params;
 
     const result = await Todo.deleteOne({ id });
@@ -86,6 +80,7 @@ app.delete('/:id', async (req, res) => {
     * app.listen - aplicatia va pute primi toate request-urile trimise 
         catre port-ul 5000 al server-ului
 */
+/*
 app.get('/test', (req, res) => {
     res.send("Hello World!")
 })
@@ -93,3 +88,4 @@ app.get('/test', (req, res) => {
 app.listen(5000, () => {
     console.log('Listening on 5000');
 })
+*/
