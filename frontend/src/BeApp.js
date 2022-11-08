@@ -5,7 +5,6 @@ import axios from 'axios';
 const API_URL = 'http://localhost:5000/todos';
 
 function BeApp() {
-    /*
     const [todos, setTodos] = useState([
         {
             id: "None",
@@ -23,7 +22,7 @@ function BeApp() {
         getTodos();
     }, []);
 
-    async function addNewToDo(form) {
+    async function addNewTodo(form) {
         form.preventDefault();
         let body = {
             text: form.target.todoText.value
@@ -33,6 +32,7 @@ function BeApp() {
         await getTodos();
     }
 
+    /*
     async function updateTodo(item) {
         await axios.patch(API_URL + item._id, {
             text: item.text,
@@ -54,26 +54,23 @@ function BeApp() {
                       si vezi ce apare pe ecran
         */}
 
-        {/*
         <h1>To Do App - Workshop IT</h1>
         <form action="" onSubmit={addNewTodo}>
             <label htmlFor="todoAdder">Add new item</label>
             <input type="text" name="todoText" id="todoText" placeholder={"Tasteaza aici."} required={true}/>
             <button type="submit">Adauga</button>
         </form>
-        */}
 
-        {/* 
         <ul>
             {todos.map((item, index)=>{
                 return (
                 <li className={item.done ? "finished" : "notFinished"} key={item._id}>
                     {`${index}: ${item.text}`}
                     <span>
-                        <button onPointerDown={() => updateTodo(item)}>
+                        <button onPointerDown={() => null}>
                             Mark as {item.done? "unfinished": "finished"}
                         </button>
-                        <button onPointerDown={() => removeTodo(item)}>
+                        <button onPointerDown={() => null}>
                             Delete
                         </button>
                     </span>
@@ -81,7 +78,6 @@ function BeApp() {
                 )
             })}
         </ul>
-        */}
     </div>
   );
 }

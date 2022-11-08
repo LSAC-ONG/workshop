@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyparser.json());
 
 /*
-    TODO 1.2: Decomenteaza urmatorul block pentru a putea sa primesti
+    TODO 2: Decomenteaza urmatorul block pentru a putea sa primesti
         o lista cu toate todo-urile stocate in baza de date    
 
     * Todo.find() - aceasta functie o sa ne intoarca din baza de date
@@ -24,7 +24,7 @@ app.get('/todos', async (req, res) => {
 */
 
 /*
-    TODO 1.3: Decomenteaza urmatorul block pentru a putea sa adaugi 
+    TODO 3: Decomenteaza urmatorul block pentru a putea sa adaugi 
         un nou todo in baza de date    
     
     * req.body - ne intoarce body-ul primit de la client
@@ -45,6 +45,13 @@ app.post('/todos', async (req, res) => {
 */
 
 /*
+    TODO 4: Decomenteaza urmatorul block pentru a putea sa modifici 
+        un todo exitent pe baza id-ului
+    
+    * req.params - ne intoarce bucatile din path care sunt prefixate
+        de :
+*/
+/*
 app.patch('/todos/:id', async (req, res) => {
     const { text, done } = req.body;
     const { id } = req.params;
@@ -58,6 +65,10 @@ app.patch('/todos/:id', async (req, res) => {
 */
 
 /*
+    TODO 5: Decomenteaza urmatorul block pentru a putea sa stergi 
+        un todo din baza de date
+*/
+/*
 app.delete('/todos/:id', async (req, res) => {
     const { id } = req.params;
 
@@ -67,7 +78,7 @@ app.delete('/todos/:id', async (req, res) => {
 */
 
 /*
-    TODO 1.1: Decomenteaza urmatorul block pentru a porni aplicatia
+    TODO 1: Decomenteaza urmatorul block pentru a porni aplicatia
 
     * app.get - o sa primeasca toate request-urile de tip GET catre 
         un endpoint(primul parametru) si va executa o functie(al doilea
