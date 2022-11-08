@@ -62,7 +62,7 @@ function LocalApp() {
             TODO 3.1: Schimba functia atribuita lui onSubmit cu addNewTodo
         */}
         {/*
-        <form action="" onSubmit={addNewTodo}>
+        <form action="" onSubmit={null}>
             <label htmlFor="todoAdder">Add new item</label>
             <input type="text" name="todoAdder" id="todoAdder" placeholder={"Tasteaza aici."} required={true}/>
             <button type="submit">Adauga</button>

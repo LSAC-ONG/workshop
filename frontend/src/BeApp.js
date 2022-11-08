@@ -67,10 +67,10 @@ function BeApp() {
                 <li className={item.done ? "finished" : "notFinished"} key={item._id}>
                     {`${index}: ${item.text}`}
                     <span>
-                        <button onPointerDown={() => null}>
+                        <button onClick={() => null}>
                             Mark as {item.done? "unfinished": "finished"}
                         </button>
-                        <button onPointerDown={() => null}>
+                        <button onClick={() => null}>
                             Delete
                         </button>
                     </span>
